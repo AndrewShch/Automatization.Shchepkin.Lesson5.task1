@@ -1,4 +1,4 @@
-package ru.netology;
+package ru.netology.test;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,18 +14,16 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class CardDeliveryTest {
 
-    LocalDate date = LocalDate.now().plusDays(4);
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-
 
     @BeforeEach
     void setUp() {
         open("http://localhost:9999");
     }
+
     @Test
     void shouldSuccessTest(){
-        RegistrationInfo info = DataGenerator.Registration.generateByCard("ru");
-        System.out.println(info.getCity() + info.getName() + info.getPhone());
+        RegistrationInfo info = DataGenerator.Registration.generate("ru");
+        System.out.println(info.getCity() + info.getName() + info.getPhoneNumber());
 
 
     }
