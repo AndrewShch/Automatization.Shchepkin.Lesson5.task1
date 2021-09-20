@@ -8,6 +8,7 @@ import ru.netology.data.DataGenerator;
 import ru.netology.data.RegistrationInfo;
 
 
+import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -34,11 +35,15 @@ public class CardDeliveryTest {
         $("[class=checkbox__box]").click();
         $("[class=button__text]").click();
         $(withText("Успешно!")).shouldBe(Condition.appear);
+        $(".notification__content").shouldHave(exactText("Встреча успешно запланирована на " + generateDate(4)));
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
         $("[data-test-id='date'] input").sendKeys(generateDate(6));
         $(withText("Запланировать")).click();
         $("[data-test-id='replan-notification'] .notification__title").shouldBe(Condition.appear);
         $(withText("Перепланировать")).click();
+        $(".notification__content").shouldHave(exactText("Встреча успешно запланирована на " + generateDate(6)));
+
+
     }
     @Test
     void emptyCityField() {
